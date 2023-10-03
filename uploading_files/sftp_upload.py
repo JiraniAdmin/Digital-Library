@@ -26,8 +26,8 @@ def main():
     hostname = 'general.asu.edu'
     username = 'oservin'
     password = ''
-    remote_file_path = '/afs/asu.edu/users/p/p/a/ppalaci2/funny/transfer.txt'
-    local_dir_path = '/afs/asu.edu/users/o/s/e/oservin/Jirani/'
+    remote_file_path = '/afs/asu.edu/users/o/s/e/oservin/transfer.txt'
+    local_dir_path = '/afs/asu.edu/users/p/p/a/ppalaci2/funny/'
     
     #hostname = input('Enter remote server hostname:\n')
     #username = input('Enter username for remoter server:\n')
