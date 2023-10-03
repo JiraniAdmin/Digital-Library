@@ -23,17 +23,17 @@ def main():
     # GETTING AN ERROR WHEN INPUTTING, HARDCODING FOR NOW
     print('Starting File\n\n')
     
-    hostname = 'general.asu.edu'
-    username = 'oservin'
+    hostname = ''
+    username = ''
     password = ''
-    remote_file_path = '/afs/asu.edu/users/o/s/e/oservin/transfer.txt'
-    local_dir_path = '/afs/asu.edu/users/p/p/a/ppalaci2/funny/'
+    remote_file_path = ''
+    local_dir_path = ''
     
     #hostname = input('Enter remote server hostname:\n')
     #username = input('Enter username for remoter server:\n')
     #password = input('Enter password for remote server:\n')
     #remote_file_path = input('Enter full path to file in remote server:\n')
-    #local_dir_path = input('Enter full path to directory where file will be saved:\n')
+    #local_dir_path = input('Enter fu       ll path to directory where file will be saved:\n')
     
     # STEP: Verify that local directory exists
     # RESULT: Path already exist then nothing, else create path
