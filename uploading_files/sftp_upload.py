@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # Imports: Standard Libraries
 # ---------------------------
 import logging      # Will be used later on when we are testing prototype
@@ -11,6 +13,7 @@ import paramiko
 import requests
 import sys
 
+# Later import SQL to add PATH to SQL database
 
 def main():
 """
@@ -52,7 +55,7 @@ This function will get a file from the remote server to the local machine
 Args:
     hostname (string): IP address or DNS of the server/raspPi
     username (string): Username for the server
-    password (): Password for user on remote server
+    password (string): Password for user on remote server
     remote_file_path (string): Full path to the file on remote server
     local_file_path (string): Full path where file will be saved
     
