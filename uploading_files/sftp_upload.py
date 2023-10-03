@@ -8,7 +8,6 @@ import json
 import time
 from datetime import datetime, timedelta
 import os
-from pathlib import Path
 import paramiko
 import requests
 import sys
@@ -21,20 +20,28 @@ def main():
     """
     # STEP: Prompt user for inputs
     # RESULT: Store the inputs
+    # GETTING AN ERROR WHEN INPUTTING, HARDCODING FOR NOW
     print('Starting File\n\n')
-    hostname = input('Enter remote server hostname:\n')
-    username = input('Enter username for remoter server:\n')
-    password = input('Enter password for remote server:\n')
-    remote_file_path = input('Enter full path to file in remote server:\n')
-    local_dir_path = input('Enter full path to directory where file will be saved:\n')
+    
+    hostname = 'general.asu.edu'
+    username = 'oservin'
+    password = ''
+    remote_file_path = '/afs/asu.edu/users/p/p/a/ppalaci2/funny/transfer.txt'
+    local_dir_path = '/afs/asu.edu/users/o/s/e/oservin/Jirani/'
+    
+    #hostname = input('Enter remote server hostname:\n')
+    #username = input('Enter username for remoter server:\n')
+    #password = input('Enter password for remote server:\n')
+    #remote_file_path = input('Enter full path to file in remote server:\n')
+    #local_dir_path = input('Enter full path to directory where file will be saved:\n')
     
     # STEP: Verify that local directory exists
     # RESULT: Path already exist then nothing, else create path
     if not os.path.exists(local_dir_path):
         print('\nLocal Path does not exist. Will now create the path.\n')
-        os.makedirs(local_directory_path)
+        os.makedirs(local_dir_path)
         
-    local_file_path = os.path.join(local_directory_path, os.path.basename(remote_file_path))
+    local_file_path = os.path.join(local_dir_path, os.path.basename(remote_file_path))
     
     # STEP: Call the sftp function and pass in parameters
     # RESULT: File downloaded from remoter server
@@ -85,17 +92,17 @@ def sftp_get_file(hostname, username, password, remote_file_path, local_file_pat
         sftp.close()
         
         # Check if file was downloaded
-        print('\nChecking if the file is in ' + local_file_path '\n')
+        print('\nChecking if the file is in ' + local_file_path + '\n')
         if os.path.exists(local_file_path):
             return True
         else:
-            print('\nLocal file ' + local_file_path ' was not created.\n')
+            print('\nLocal file ' + local_file_path + ' was not created.\n')
             return False
     
     # STEP: Handle errors
     # RESULT: Print the error message
     except Exception as e:
-        print(f'Error: {e}')
+        print('Error: ' + e)
         return False
     
     # STEP: Ensure that ssh client was closed
