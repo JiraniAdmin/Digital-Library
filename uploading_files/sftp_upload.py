@@ -16,9 +16,9 @@ import sys
 # Later import SQL to add PATH to SQL database
 
 def main():
-"""
-This function serves as the driver
-"""
+    """
+    This function serves as the driver
+    """
     # STEP: Prompt user for inputs
     # RESULT: Store the inputs
     print('Starting File\n\n')
@@ -43,25 +43,25 @@ This function serves as the driver
     # STEP: Check if the file was transefered to local machine
     # RESULT:  Print the message to user
     if success:
-        print(f'\nSuccessfully downloaded {remote_file_path} to {local_file_path}')
+        print('\nSuccessfully downloaded ' + remote_file_path + ' to ' + local_file_path)
     else:
-        print(f'\nFailed to download {remote_file_path}')
+        print('\nFailed to download ' + remote_file_path)
 
 
 def sftp_get_file(hostname, username, password, remote_file_path, local_file_path):
-"""
-This function will get a file from the remote server to the local machine
+    """
+    This function will get a file from the remote server to the local machine
 
-Args:
-    hostname (string): IP address or DNS of the server/raspPi
-    username (string): Username for the server
-    password (string): Password for user on remote server
-    remote_file_path (string): Full path to the file on remote server
-    local_file_path (string): Full path where file will be saved
+    Args:
+        hostname (string): IP address or DNS of the server/raspPi
+        username (string): Username for the server
+        password (string): Password for user on remote server
+        remote_file_path (string): Full path to the file on remote server
+        local_file_path (string): Full path where file will be saved
     
-Returns:
-    bool: Returns true if sftp.get was successful, otherwise false
-"""
+    Returns:
+        bool: Returns true if sftp.get was successful, otherwise false
+    """
     # STEP: Start the ssh client instance, and connect to the remote server
     # RESULT: created the instance, and connected to remote server
     ssh_client = paramiko.SSHClient()
@@ -74,7 +74,7 @@ Returns:
     try:
         sftp.stat(remote_file_path)
     except FileNotFoundError:
-        print(f'\nRemote file {remote_file_path} does not exist.\n')
+        print('\nRemote file ' + remote_file_path + ' does not exist.\n')
         return False
         
     # STEP: Perform the sftp get operation
@@ -85,11 +85,11 @@ Returns:
         sftp.close()
         
         # Check if file was downloaded
-        print(f'\nChecking if the file is in {local_file_path}\n')
+        print('\nChecking if the file is in ' + local_file_path '\n')
         if os.path.exists(local_file_path):
             return True
         else:
-            print(f'\nLocal file {local_file_path} was not created.\n')
+            print('\nLocal file ' + local_file_path ' was not created.\n')
             return False
     
     # STEP: Handle errors
