@@ -82,6 +82,7 @@ Returns:
         sftp.close()
         
         # Check if file was downloaded
+        print(f'\nChecking if the file is in {local_file_path}\n')
         if os.path.exists(local_file_path):
             return True
         else:
