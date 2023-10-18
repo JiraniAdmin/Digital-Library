@@ -23,7 +23,7 @@ def main():
     # GETTING AN ERROR WHEN INPUTTING, HARDCODING FOR NOW
     print('Starting File\n\n')
     
-    hostname = ''
+    hostname = 'Osman'
     username = ''
     password = ''
     remote_file_path = ''
