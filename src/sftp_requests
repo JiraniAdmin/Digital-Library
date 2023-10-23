@@ -11,6 +11,7 @@ import os
 import paramiko
 import requests
 import sys
+import getpass
 
 # Later import SQL to add PATH to SQL database
 
@@ -23,29 +24,29 @@ def main():
     # GETTING AN ERROR WHEN INPUTTING, HARDCODING FOR NOW
     print('Starting File\n\n')
     
-    hostname = 'Osman'
-    username = ''
-    password = ''
-    remote_file_path = ''
-    local_dir_path = ''
+    # host = ''
+    # username = ''
+    # password = ''
+    # remote_file_path = ''
+    # local_dir_path = ''
     
-    #hostname = input('Enter remote server hostname:\n')
-    #username = input('Enter username for remoter server:\n')
-    #password = input('Enter password for remote server:\n')
-    #remote_file_path = input('Enter full path to file in remote server:\n')
-    #local_dir_path = input('Enter fu       ll path to directory where file will be saved:\n')
+    host = input('Enter remote server host(IP or DNS): ')
+    username = input(f'Enter username for {host}: ')
+    password = getpass.getpass('Enter password for remote server: ')
+    remote_file_path = input('Enter full path to file on server: ')
+    local_dir_path = '/home/jirani/Desktop'
     
     # STEP: Verify that local directory exists
     # RESULT: Path already exist then nothing, else create path
     if not os.path.exists(local_dir_path):
-        print('\nLocal Path does not exist. Will now create the path.\n')
+        print('\nLocal Path does not exist. Creating the path.\n')
         os.makedirs(local_dir_path)
         
     local_file_path = os.path.join(local_dir_path, os.path.basename(remote_file_path))
     
     # STEP: Call the sftp function and pass in parameters
     # RESULT: File downloaded from remoter server
-    success = sftp_get_file(hostname, username, password, remote_file_path, local_file_path)
+    success = sftp_get_file(host, username, password, remote_file_path, local_file_path)
 
     # STEP: Check if the file was transefered to local machine
     # RESULT:  Print the message to user
@@ -55,15 +56,15 @@ def main():
         print('\nFailed to download ' + remote_file_path)
 
 
-def sftp_get_file(hostname, username, password, remote_file_path, local_file_path):
+def sftp_get_file(host, username, password, remote_file_path, local_file_path):
     """
     This function will get a file from the remote server to the local machine
 
     Args:
-        hostname (string): IP address or DNS of the server/raspPi
+        host (string): IP address or DNS of the server/computer where book is
         username (string): Username for the server
-        password (string): Password for user on remote server
-        remote_file_path (string): Full path to the file on remote server
+        password (string): Password for user on server
+        remote_file_path (string): Full path to the file on server
         local_file_path (string): Full path where file will be saved
     
     Returns:
@@ -73,7 +74,7 @@ def sftp_get_file(hostname, username, password, remote_file_path, local_file_pat
     # RESULT: created the instance, and connected to remote server
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(hostname, port=22, username=username, password=password)
+    ssh_client.connect(host, port=22, username=username, password=password)
     sftp = ssh_client.open_sftp()
     
     # STEP: Verify that file exists
@@ -101,8 +102,8 @@ def sftp_get_file(hostname, username, password, remote_file_path, local_file_pat
     
     # STEP: Handle errors
     # RESULT: Print the error message
-    except Exception as e:
-        print('Error: ' + e)
+    except Exception as err:
+        print('Error: ' + err)
         return False
     
     # STEP: Ensure that ssh client was closed
