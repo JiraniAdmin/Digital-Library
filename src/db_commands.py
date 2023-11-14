@@ -13,6 +13,15 @@ import sys
 
 import sqlite3
 def create_library_database():
+    """
+    This function creates a database table.
+
+    Args:
+         none
+        
+    Returns:
+        bool: true if created, false if not
+    """
     # Connect to SQLite database (or create a new one if it doesn't exist)
     db_path = "/home/jirani/library.db"
     print(db_path)
