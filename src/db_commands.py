@@ -35,7 +35,7 @@ def create_library_database():
     conn.commit()
     conn.close()
 
-       print("'Author', 'Path', and 'Description' columns created.")
+    print("Author, Path, and Description columns created.")
 
 if __name__ == "__main__":
     create_library_database()
