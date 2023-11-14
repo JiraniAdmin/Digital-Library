@@ -43,4 +43,4 @@ def search_books(conn, title, author):
 # if __name__ == "__main__":
 #     main()
 
-search_books("Lorax", author=None)
+search_books("Lorax", None)
