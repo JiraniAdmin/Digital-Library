@@ -8,7 +8,7 @@ def add_book(title, author, path, description):
     conn = sqlite3.connect('/home/jirani/library.db')
     cursor = conn.cursor()
 
-    cursor.execute('INSERT INTO books (title, author, path, description) VALUES (?, ?)', (title, author, path, description))
+    cursor.execute('INSERT INTO books (title, author, path, description) VALUES (?, ?, ?, ?)', (title, author, path, description))
     
     # Retrieve the new count
     # cursor.execute('SELECT book_count FROM counters WHERE id = 1')
