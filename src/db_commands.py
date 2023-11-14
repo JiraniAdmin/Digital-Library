@@ -14,7 +14,7 @@ import sys
 import sqlite3
 def create_library_database():
     # Connect to SQLite database (or create a new one if it doesn't exist)
-    db_path = os.path.join("~", "library.db")
+    db_path = "/home/jirani/library.db"
     print(db_path)
     conn = sqlite3.connect(db_path)
 
