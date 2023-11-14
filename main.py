@@ -1,4 +1,6 @@
+#!/usr/bin/python
 import sqlite3
+
 
 
 def search_books(conn, title=None, author=None):
