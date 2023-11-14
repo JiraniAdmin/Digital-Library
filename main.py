@@ -12,7 +12,7 @@ def search_books(conn, title=None, author=None):
     cur = conn.cursor()
 
     
-    if title:
+    if title=="Lorax":
         cur.execute("SELECT * FROM books WHERE title LIKE ?", ('%' + title + '%',))
     elif author:
         cur.execute("SELECT books.* FROM books JOIN authors ON books.author_id = authors.id WHERE authors.name LIKE ?", ('%' + author + '%',))
