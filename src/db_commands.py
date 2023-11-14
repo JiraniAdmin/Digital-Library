@@ -3,48 +3,46 @@ import sqlite3
 
 
 def add_book(title, author, path, description):
-    # Add a new book
-    # Connect to SQLite database
-    conn = sqlite3.connect('/home/jirani/library.db')
-    cursor = conn.cursor()
+    """
+    This function adds a new book to the database table
 
-    cursor.execute('INSERT INTO books (title, author, path, description) VALUES (?, ?, ?, ?)', (title, author, path, description))
-    
-    # Retrieve the new count
-    # cursor.execute('SELECT book_count FROM counters WHERE id = 1')
-    # count = cursor.fetchone()[0]
-    print(f"Book {title} added.")
+    Args:
+        title (string): Title of the book
+        author (string): Author of the book
+        path (string): Path where the book is saved
+        description (string): Short description of book
 
-    conn.close()
-
-try:
-        # Check if database already exists    
-        db_path = f"/home/jirani/{database}"
-
-        if os.path.exists(db_path)
-            print(f"Database '{database}' already exists.")
-            return False
-
-        # Connect to SQLite database and create cursor to interact with db 
-        conn = sqlite3.connect(db_path)
+    Return:
+        bool: True if book was added, otherwise false
+    """
+    try:
+        # Add a new book
+        # Connect to SQLite database
+        conn = sqlite3.connect('/home/jirani/library.db')
         cursor = conn.cursor()
 
-        # Create a table with columns "title", "author", "path", and "description"
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS books (
-            title TEXT,
-            author TEXT,
-            path TEXT,
-            description TEXT
-        )
-        ''')
+        # Check if book already exists
 
-        # Commit the changes and close the database connection
-        conn.commit()
+        cursor.execute('''
+            INSERT INTO books 
+            (title, author, path, description) 
+            VALUES (?, ?, ?, ?)''', 
+            (title, author, path, description))
+
+        
+        # Check for the book again to make sure it is there
+
+        print(f"{title} added to the database.")
+
         conn.close()
 
-        print("Database table created with columns: title, author, path, description")
-        return True
+    except sqlite3.Error as err:
+        print(f"SQLite error: {err}")
+        return False
+        
+    except Exception as err:
+        print(f"Error occurred: {err}")
+        return False
+
 
 add_book("Lorax", "Dr. Suess", "/home/jirani", "Children's Book")
-
