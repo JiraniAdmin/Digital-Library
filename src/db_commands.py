@@ -6,38 +6,38 @@ import pprint
 from datetime import datetime, timedelta
 import os
 import sys
-# import our database once it has been created
-
-
-
-
 import sqlite3
-def create_library_database():
+
+
+def create_library_database(database):
     """
-    This function creates a database table.
+    This function creates a new database table with a specified table.
 
     Args:
-         none
+         database (string): Name of the database to create
         
     Returns:
-        bool: true if created, false if not
+        bool: true if database created, otherwise false
     """
     try:
-        # Connect to SQLite database (or create a new one if it doesn't exist)
-        db_path = "/home/jirani/library.db"
-        print(db_path)
-        conn = sqlite3.connect(db_path)
+        # Check if database already exists    
+        db_path = f"/home/jirani/{database}"
 
-        # Create a cursor object to interact with the database
+        if os.path.exists(db_path)
+            print(f"Database '{database}' already exists.")
+            return False
+
+        # Connect to SQLite database and create cursor to interact with db 
+        conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
 
-        # Create a table with columns "Title", "Author", "Path", and "Description"
+        # Create a table with columns "title", "author", "path", and "description"
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS books (
-            Title TEXT,
-            Author TEXT,
-            Path TEXT,
-            Description TEXT
+            title TEXT,
+            author TEXT,
+            path TEXT,
+            description TEXT
         )
         ''')
 
@@ -45,7 +45,7 @@ def create_library_database():
         conn.commit()
         conn.close()
 
-        print("Author, Path, and Description columns created.")
+        print("Database table created with columns: title, author, path, description")
         return True
     
     except sqlite3.Error as err:
@@ -55,5 +55,3 @@ def create_library_database():
     except Exception as err:
         print(f"Error occurred: {err}")
         return False
-
-          
