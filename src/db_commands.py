@@ -37,8 +37,7 @@ def create_library_database():
 
     print("Author, Path, and Description columns created.")
 
-if __name__ == "__main__":
-    create_library_database()
+
 
 create_library_database()
 
