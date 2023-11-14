@@ -3,7 +3,7 @@ import sqlite3
 
 
 
-def search_books(conn, title=None, author=None):
+def search_books(conn, title, author):
     """Search for books by title or author."""
     """Connect to the SQLite database."""
     conn = sqlite3.connect("/home/jirani/library.db")
