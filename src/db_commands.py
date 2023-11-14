@@ -17,5 +17,34 @@ def add_book(title, author, path, description):
 
     conn.close()
 
+try:
+        # Check if database already exists    
+        db_path = f"/home/jirani/{database}"
+
+        if os.path.exists(db_path)
+            print(f"Database '{database}' already exists.")
+            return False
+
+        # Connect to SQLite database and create cursor to interact with db 
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+
+        # Create a table with columns "title", "author", "path", and "description"
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS books (
+            title TEXT,
+            author TEXT,
+            path TEXT,
+            description TEXT
+        )
+        ''')
+
+        # Commit the changes and close the database connection
+        conn.commit()
+        conn.close()
+
+        print("Database table created with columns: title, author, path, description")
+        return True
+
 add_book("Lorax", "Dr. Suess", "/home/jirani", "Children's Book")
 
